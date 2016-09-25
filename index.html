@@ -1,10 +1,101 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <title>Safe Route</title>
         <script src="/js/latlongdistance.js"></script>
         <script src="/js/data100types.js"></script>
         <script src="/js/calculatescore.js"></script>
+        <link href="css/sidebar.css" rel="stylesheet">
+        
+         <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.5/leaflet.css"/>
+         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
+         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.2.6/d3.js" charset="utf-8"></script>
+         <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places"></script>
+         <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+         <script src="http://cdn.leafletjs.com/leaflet-0.7.5/leaflet.js"></script>
+         <script src="https://www.mapquestapi.com/sdk/leaflet/v2.2/mq-map.js?key=qCHdHcf30c1guM19c286tQVzNtLnUN02"></script>
+         <script src="https://www.mapquestapi.com/sdk/leaflet/v2.2/mq-routing.js?key=qCHdHcf30c1guM19c286tQVzNtLnUN02"></script>
+         <script src="js/gplaces.js"></script>
+        
     </head>
-    <body>
-    </body>
+        <body style="background-color:white">
+
+
+    <div id="wrapper">
+
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+            <ul class="sidebar-nav">
+                <li class="sidebar-brand">
+                    <a href="#">
+                        Safe Drive
+                    </a>
+                </li>
+                <li>
+                    <div><label for="locationTextField">Enter From Address</label>
+                        <input id="locationFromTextField" type="text" size="55">
+                    </div>
+                    <div><label for="locationTextField">Enter To Address</label>
+                      <input id="locationToTextField" type="text" size="55">
+                    </div>
+                    
+                </li>
+                
+            </ul>
+        </div>
+        
+        <section id="#">
+                    <div id="map" style="width: 100%; height:100%; position:absolute;"></div>
+                    </div>
+        </section>
+        
+        <script type="text/javascript">
+var map = L.map('map').setView([40.7637581,-73.99181], 12);
+        //var data = [];
+        L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+            maxZoom: 18,
+            attribution: ' ',
+            dragging: 'true'
+        }).addTo(map);
+
+        var dir = MQ.routing.directions();
+
+        temp = MQ.routing.routeLayer({
+          directions: dir,
+          fitBounds: true,
+          ribbonOptions: {
+            draggable: false,
+            ribbonDisplay: { color: '#5882FA', opacity: 0.7 },
+            widths: [ 10, 15, 10, 15, 10, 13, 10, 12, 10, 11, 10, 11, 10, 12, 10, 14, 10 ]
+          },
+
+          altRibbonOptions: {
+            show: true,
+            ribbonDisplay: { color: '#F78181', opacity: 0.7},
+            hoverDisplay: { color: 'red', opacity: 0.6 }
+          }
+        });
+
+
+function mquest(lat1,lng1,lat2,lng2){
+
+d3.request('https://www.mapquestapi.com/directions/v2/alternateroutes?key=qCHdHcf30c1guM19c286tQVzNtLnUN02&from='+lat1+','+lng1+'&to='+lat2+','+lng2+'&outFormat=json&ambiguities=ignore&routeType=fastest&maxRoutes=3&timeOverage=25&doReverseGeocode=false&enhancedNarrative=false&avoidTimedConditions=false&unit=M').get(function(data){
+   var route=JSON.parse(data.response);
+   console.log(route.route.shape.shapePoints);
+   console.log(route.route.alternateRoutes[0].route.shape.shapePoints);
+ });
+
+dir.route({
+  maxRoutes: 5,
+  timeOverage: 25,
+  locations: [
+      {latLng: { lat: lat1, lng: lng1}},
+      {latLng: { lat: lat2, lng: lng2}}
+  ]
+});
+map.addLayer(temp);
+}
+</script>
+        
+</body>
 </html>
