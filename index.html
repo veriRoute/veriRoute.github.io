@@ -1,10 +1,16 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
-        <title>Safe Route</title>
+        <title>VeriRoute</title>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, shrink-to-fit=no, initial-scale=1">
+        
         <script src="/js/latlongdistance.js"></script>
         <script src="/js/datatypes.js"></script>
         <script src="/js/calculatescore.js"></script>
+        <script src="js/jquery.js"></script>
+        <link href="css/main.css" rel="stylesheet">
         <link href="css/sidebar.css" rel="stylesheet">
         
          <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.5/leaflet.css"/>
@@ -24,32 +30,33 @@
     <div id="wrapper">
 
         <!-- Sidebar -->
-        <div style = "font-family: Arial" id="sidebar-wrapper">
+        <div id="sidebar-wrapper">
             <ul class="sidebar-nav">
                 <li class="sidebar-brand">
                     <a href="#">
-                        Safe Drive
+                        VeriRoute
                     </a>
                 </li>
                 <li>
-                    <div style="width:70%; margin: 0 auto;"><label for="locationTextField">Enter From Address</label>
-                        <input id="locationFromTextField" type="text" size="55">
+                    <div style="padding-right: 25px"><label for="locationTextField">Enter From Address</label>
+                        <input id="locationFromTextField" type="text" size="33">
                     </div>
-                    <div style="width:70%; margin: 0 auto;"><label for="locationTextField">Enter To Address</label>
-                      <input id="locationToTextField" type="text" size="55">
+                    <div><label for="locationTextField">Enter To Address</label>
+                      <input id="locationToTextField" type="text" size="33">
                     </div>
-                    
+
                 </li>
-                
             </ul>
         </div>
         
-        <section id="#">
-                    <div id="map" style="width: 100%; height:100%; position:absolute;"></div>
-        </section>
         
-        <script type="text/javascript">
-            var map = L.map('map').setView([40.7637581,-73.99181], 12);
+        <!-- Map -->
+        <div id="page-content-wrapper">
+            <div class="container-fluid">
+                <div>
+                      <div id="mapview" style="width: 100%; height: 100vh;">
+                        <script type="text/javascript">
+                    var map = L.map('mapview').setView([40.7637581,-73.99181], 12);
                     //var data = [];
                     L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
                         maxZoom: 18,
@@ -109,7 +116,20 @@
             });
             map.addLayer(temp);
             }
-</script>
+            </script>
+                    </div>
+                  </div>
+                </div>
+            </div>
+        </div>
+        
+            
+<script>
+    $("#menu-toggle").click(function(e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+    });
+</script>            
         
 </body>
 </html>
