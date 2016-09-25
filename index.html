@@ -3,10 +3,9 @@
     <head>
         <title>Safe Route</title>
         <script src="/js/latlongdistance.js"></script>
-        <script src="/js/data100types.js"></script>
+        <script src="/js/datatypes.js"></script>
         <script src="/js/calculatescore.js"></script>
         <link href="css/sidebar.css" rel="stylesheet">
-        <link href="css/main.css" rel="stylesheet">
         
          <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.5/leaflet.css"/>
          <script src="//ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
@@ -92,6 +91,9 @@
                if (typeof(route.route.alternateRoutes) === "undefined");
                else
                    console.log(calculatescore(arraytoJSON(route.route.alternateRoutes[0].route.shape.shapePoints)));
+                if (typeof(route.route.shape) === "undefined")
+                    alert('No routes found');
+               else
                     console.log(calculatescore(arraytoJSON(route.route.shape.shapePoints)));
                 
                
