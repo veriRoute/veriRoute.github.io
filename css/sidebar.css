@@ -1,3 +1,14 @@
+/*!
+ * Start Bootstrap - Simple Sidebar (http://startbootstrap.com/)
+ * Copyright 2013-2016 Start Bootstrap
+ * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap/blob/gh-pages/LICENSE)
+ */
+
+ body {
+    overflow-x: hidden;
+ }
+
+/* Toggle Styles */
 
 #wrapper {
     padding-left: 0;
@@ -13,12 +24,13 @@
 
 #sidebar-wrapper {
     z-index: 1000;
-    position: absolute;
-    left: 0;
-    width: 20%;
+    position: fixed;
+    left: 250px;
+    width: 0;
     height: 100%;
+    margin-left: -250px;
     overflow-y: auto;
-    background: white;
+    background: #fafafa;
     -webkit-transition: all 0.5s ease;
     -moz-transition: all 0.5s ease;
     -o-transition: all 0.5s ease;
@@ -26,7 +38,7 @@
 }
 
 #wrapper.toggled #sidebar-wrapper {
-    width: 20%;
+    width: 250px;
 }
 
 #page-content-wrapper {
@@ -59,13 +71,12 @@
 .sidebar-nav li a {
     display: block;
     text-decoration: none;
-    color: black;
-    font-weight: bold
+    color: #999999;
 }
 
 .sidebar-nav li a:hover {
     text-decoration: none;
-    color: black;
+    color: #fff;
     background: rgba(255,255,255,0.2);
 }
 
@@ -82,7 +93,6 @@
 
 .sidebar-nav > .sidebar-brand a {
     color: black;
-    font-weight: bold
 }
 
 .sidebar-nav > .sidebar-brand a:hover {
