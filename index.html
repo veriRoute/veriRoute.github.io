@@ -81,8 +81,20 @@
 
             d3.request('https://www.mapquestapi.com/directions/v2/alternateroutes?key=qCHdHcf30c1guM19c286tQVzNtLnUN02&from='+lat1+','+lng1+'&to='+lat2+','+lng2+'&outFormat=json&ambiguities=ignore&routeType=fastest&maxRoutes=3&timeOverage=25&doReverseGeocode=false&enhancedNarrative=false&avoidTimedConditions=false&unit=M').get(function(data){
                var route=JSON.parse(data.response);
-               console.log(route.route.shape.shapePoints);
-               console.log(route.route.alternateRoutes[0].route.shape.shapePoints);
+                
+            function arraytoJSON(l){
+                var lJSON = [];
+                for (var i = 0; i< l.length; i+=2){
+                        lJSON.push({lat: l[i], long: l[i+1]});
+                }
+                return lJSON;
+            }
+               if (typeof(route.route.alternateRoutes) === "undefined");
+               else
+                   console.log(calculatescore(arraytoJSON(route.route.alternateRoutes[0].route.shape.shapePoints)));
+                    console.log(calculatescore(arraytoJSON(route.route.shape.shapePoints)));
+                
+               
              });
 
             dir.route({

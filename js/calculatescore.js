@@ -6,8 +6,6 @@ function calculatescore(l) {
         crimeRates.push(Math.ceil(Math.random()*ran));
     }
     
-    findvicinity(l);
-    
     function calculateCrimeScore(crimeRates, ran) { // josh part starts
         var score = 0;
         var numRates = crimeRates.length; // records the number of crimerates recorded 
@@ -29,7 +27,7 @@ function calculatescore(l) {
                 }
             }
         }
-        vicinityPoints(m);
+        return vicinityPoints(m);
     }
     
     function vicinityPoints(JSONpoints) {  // josh part starts
@@ -57,7 +55,8 @@ function calculatescore(l) {
         var b = (brakeArr.length>10)?10:(brakeArr.length);
         var p = (phoneArr.length>10)?10:(phoneArr.length);
         score+=(((s)*10)+((a)*10)+((b)*5)+((p)*30));
+        return score;
     }
+    
+    return findvicinity(l);
 }
-
-//calculatescore(l)
